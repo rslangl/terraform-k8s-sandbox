@@ -9,6 +9,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
 
   cpu {
     cores = var.vm_cores
+    flags = ["-cpu kvm64","+cx16","+lahf_lm","+popcnt","+sse3","+ssse3","+sse4.1","+sse4.2"]
   }
 
   memory {
