@@ -4,6 +4,7 @@
     terraform
     qemu
     talosctl
+    kubectl
   ];
 
   in pkgs.mkShell {
