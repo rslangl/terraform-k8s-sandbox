@@ -6,6 +6,6 @@ terraform {
   }
 }
 
-module "dev" {
+module "talos" {
   source = "./modules/talos"
 }
