@@ -21,6 +21,15 @@ nix-shell
 # Deploy with terraform
 terraform plan -out plan
 terraform apply "plan"
+
+# Once in a running state, get the IP from the console
+export CONTROL_PLANE_IP=192.168.88.224
+
+# Generate configs
+talosctl gen config talos-proxmox-cluster https://$CONTROL_PLANE_IP:6443 --output-dir _out
+
+# Apply configs
+talosctl apply --insecure --nodes $CONTROL_PLANE_IP --file _out/controlplane.yaml
 ```
 
 ## References

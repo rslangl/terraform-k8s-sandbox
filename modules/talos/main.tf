@@ -1,15 +1,16 @@
 resource "proxmox_virtual_environment_vm" "vm" {
   name = "k8s-1"
   node_name = "wintermute"
-  tags = ["terraform"]
+  tags = ["terraform", "k8s", "talos"]
   
-  #agent {
-  #  enabled = true
-  #}
+  agent {
+    enabled = true
+  }
 
   cpu {
     cores = var.vm_cores
-    flags = ["-cpu kvm64","+cx16","+lahf_lm","+popcnt","+sse3","+ssse3","+sse4.1","+sse4.2"]
+    type = "x86-64-v2-AES"
+    #flags = ["-cpu kvm64","+cx16","+lahf_lm","+popcnt","+sse3","+ssse3","+sse4.1","+sse4.2"]
   }
 
   memory {
