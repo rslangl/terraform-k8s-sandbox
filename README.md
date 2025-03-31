@@ -28,8 +28,11 @@ export CONTROL_PLANE_IP=192.168.88.224
 # Generate configs
 talosctl gen config talos-proxmox-cluster https://$CONTROL_PLANE_IP:6443 --output-dir _out
 
-# Apply configs
-talosctl apply --insecure --nodes $CONTROL_PLANE_IP --file _out/controlplane.yaml
+# Apply configs to control plane
+talosctl apply-config --insecure --nodes $CONTROL_PLANE_IP --file _out/controlplane.yaml
+
+# Apply configs to worker
+talosctl apply-config --insecure --nodes $WORKER_IP --file _out/worker.yaml 
 ```
 
 ## References

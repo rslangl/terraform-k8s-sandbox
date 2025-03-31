@@ -1,11 +1,14 @@
 resource "proxmox_virtual_environment_vm" "vm" {
-  name = "k8s-1"
+  count = 2
+  name = "k8s-${count.index}"
   node_name = "wintermute"
   tags = ["terraform", "k8s", "talos"]
   
   agent {
     enabled = true
   }
+
+  bios = "ovmf"
 
   cpu {
     cores = var.vm_cores
@@ -19,7 +22,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
 
   disk {
     datastore_id = "local-zfs"
-    file_id = "local:iso/talos_nocloud_v1.9.5.img"
+    file_id = "local:iso/talos_nocloud_amd64_v1.9.5.iso"
     interface = "virtio0"
     size = var.vm_disk
   }
